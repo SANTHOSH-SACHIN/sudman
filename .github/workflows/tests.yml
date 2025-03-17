@@ -24,6 +24,10 @@ jobs:
     - name: Install uv
       run: |
         pip install uv
+        
+    - name: Initialize environment
+      run: |
+        uv venv && source .venv/bin/activate
 
     - name: Install dependencies
       run: |
