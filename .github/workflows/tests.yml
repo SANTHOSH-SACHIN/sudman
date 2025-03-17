@@ -25,13 +25,13 @@ jobs:
       run: |
         pip install uv
 
-    - name: Initialize virtualenv
-      run: |
-        uv venv && source venv/bin/activate
+    # - name: Initialize virtualenv
+    #   run: |
+    #     uv venv && source venv/bin/activate
 
     - name: Install dependencies
       run: |
-        uv pip install -e ".[dev]"
+        uv pip install -e ".[dev]" --system
 
 
     - name: Test with pytest
