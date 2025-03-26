@@ -46,7 +46,7 @@ optional arguments:
   --version             show program's version number and exit
 
 Command to run:
-  {list,status,start,stop,restart,enable,disable,logs}
+  {list,status,start,stop,restart,enable,disable,logs,interactive}
     list                List systemd user units
     status              Show status of a unit
     start               Start a unit
@@ -55,6 +55,7 @@ Command to run:
     enable              Enable a unit
     disable             Disable a unit
     logs                Show logs for a unit
+    interactive         Start interactive TUI mode
 ```
 
 ### Examples
@@ -98,6 +99,21 @@ View more log lines:
 ```bash
 sudman logs my-service.service --lines 100
 ```
+
+Start interactive mode:
+```bash
+sudman interactive
+```
+
+## Release Notes
+
+### v0.2.0
+
+- Added interactive TUI mode (`sudman interactive`)
+- Improved error handling and user feedback
+- Added more comprehensive unit tests
+- Updated documentation and help text
+- Various bug fixes and stability improvements
 
 ## Contributing
 

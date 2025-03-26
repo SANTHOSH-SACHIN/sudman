@@ -25,6 +25,12 @@ def create_parser() -> argparse.ArgumentParser:
 
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 
+    # Interactive command
+    interactive_parser = subparsers.add_parser(
+        "interactive",
+        help="Start interactive TUI mode"
+    )
+
     # List command
     list_parser = subparsers.add_parser("list", help="List systemd user units")
     list_parser.add_argument(
@@ -139,6 +145,11 @@ def main(args: Optional[List[str]] = None) -> int:
         else:
             print(logs)  # logs contains error message
             return 1
+
+    elif parsed_args.command == "interactive":
+        from .interactive import run_interactive
+        run_interactive()
+        return 0
 
     return 0
 
