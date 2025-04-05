@@ -156,3 +156,43 @@ Description=Foo Service
 
         # Assertions
         self.assertFalse(enabled)
+
+    @patch('sudman.manager.run_command')
+    @patch('sudman.manager.check_unit_exists')
+    def test_mask_unit(self, mock_check_unit_exists, mock_run_command):
+        """Test masking a unit."""
+        # Mock the unit exists check
+        mock_check_unit_exists.return_value = True
+
+        # Mock the command output
+        mock_run_command.return_value = (0, "", "")
+
+        # Call the method
+        success, message = SystemdUnitManager.mask_unit("foo.service")
+
+        # Assertions
+        self.assertTrue(success)
+        self.assertEqual(message, "Masked foo.service successfully")
+        mock_run_command.assert_called_once_with(
+            ["systemctl", "--user", "mask", "foo.service"]
+        )
+
+    @patch('sudman.manager.run_command')
+    @patch('sudman.manager.check_unit_exists')
+    def test_unmask_unit(self, mock_check_unit_exists, mock_run_command):
+        """Test unmasking a unit."""
+        # Mock the unit exists check
+        mock_check_unit_exists.return_value = True
+
+        # Mock the command output
+        mock_run_command.return_value = (0, "", "")
+
+        # Call the method
+        success, message = SystemdUnitManager.unmask_unit("foo.service")
+
+        # Assertions
+        self.assertTrue(success)
+        self.assertEqual(message, "Unmasked foo.service successfully")
+        mock_run_command.assert_called_once_with(
+            ["systemctl", "--user", "unmask", "foo.service"]
+        )

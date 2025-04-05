@@ -61,6 +61,14 @@ def create_parser() -> argparse.ArgumentParser:
     disable_parser = subparsers.add_parser("disable", help="Disable a unit")
     disable_parser.add_argument("unit", help="Unit name")
 
+    # Mask command
+    mask_parser = subparsers.add_parser("mask", help="Mask a unit to prevent it from being started")
+    mask_parser.add_argument("unit", help="Unit name")
+
+    # Unmask command
+    unmask_parser = subparsers.add_parser("unmask", help="Unmask a unit to allow it to be started")
+    unmask_parser.add_argument("unit", help="Unit name")
+
     # Logs command
     logs_parser = subparsers.add_parser("logs", help="Show logs for a unit")
     logs_parser.add_argument("unit", help="Unit name")
@@ -133,6 +141,16 @@ def main(args: Optional[List[str]] = None) -> int:
 
     elif parsed_args.command == "disable":
         success, message = SystemdUnitManager.disable_unit(parsed_args.unit)
+        print(message)
+        return 0 if success else 1
+
+    elif parsed_args.command == "mask":
+        success, message = SystemdUnitManager.mask_unit(parsed_args.unit)
+        print(message)
+        return 0 if success else 1
+
+    elif parsed_args.command == "unmask":
+        success, message = SystemdUnitManager.unmask_unit(parsed_args.unit)
         print(message)
         return 0 if success else 1
 

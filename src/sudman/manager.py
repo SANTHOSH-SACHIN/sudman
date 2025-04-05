@@ -246,6 +246,50 @@ class SystemdUnitManager:
         return return_code == 0 and stdout.strip() == "enabled"
 
     @staticmethod
+    def mask_unit(unit_name: str) -> Tuple[bool, str]:
+        """
+        Mask a systemd user unit to prevent it from being started.
+
+        Args:
+            unit_name: Name of the unit to mask
+
+        Returns:
+            Tuple of (success, message)
+        """
+        if not check_unit_exists(unit_name):
+            return False, f"Unit {unit_name} does not exist"
+
+        cmd = ["systemctl", "--user", "mask", unit_name]
+        return_code, stdout, stderr = run_command(cmd)
+
+        if return_code == 0:
+            return True, f"Masked {unit_name} successfully"
+        else:
+            return False, f"Failed to mask {unit_name}: {stderr}"
+
+    @staticmethod
+    def unmask_unit(unit_name: str) -> Tuple[bool, str]:
+        """
+        Unmask a systemd user unit to allow it to be started.
+
+        Args:
+            unit_name: Name of the unit to unmask
+
+        Returns:
+            Tuple of (success, message)
+        """
+        if not check_unit_exists(unit_name):
+            return False, f"Unit {unit_name} does not exist"
+
+        cmd = ["systemctl", "--user", "unmask", unit_name]
+        return_code, stdout, stderr = run_command(cmd)
+
+        if return_code == 0:
+            return True, f"Unmasked {unit_name} successfully"
+        else:
+            return False, f"Failed to unmask {unit_name}: {stderr}"
+
+    @staticmethod
     def get_journal_logs(unit_name: str, lines: int = 50) -> Tuple[bool, str]:
         """
         Get journal logs for a unit.

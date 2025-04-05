@@ -105,7 +105,24 @@ Start interactive mode:
 sudman interactive
 ```
 
+Mask a unit to prevent it from starting:
+```bash
+sudman mask my-service.service
+```
+
+Unmask a unit to allow it to be started again:
+```bash
+sudman unmask my-service.service
+```
+
 ## Release Notes
+
+### v0.3.0
+
+- Added `mask` and `unmask` commands to prevent/allow units from being started
+- Improved error handling and user feedback
+- Updated documentation and help text
+- Various bug fixes and stability improvements
 
 ### v0.2.0
 

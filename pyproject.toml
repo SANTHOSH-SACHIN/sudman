@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sudman"
-version = "0.2.0"
+version = "0.3.0"
 description = "Systemd User Daemon Manager - A user-friendly interface for systemd user units"
 readme = "README.md"
 authors = [
