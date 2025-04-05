@@ -37,7 +37,7 @@ class TestCLI(unittest.TestCase):
         mock_is_user_session_active.return_value = True
 
         with patch('builtins.print') as mock_print:
-            exit_code = main(["list"])
+            exit_code = main(["unit", "list"])
 
         self.assertEqual(exit_code, 1)
         mock_print.assert_called_once_with("Error: systemd is not available on this system.")
@@ -50,7 +50,7 @@ class TestCLI(unittest.TestCase):
         mock_is_user_session_active.return_value = False
 
         with patch('builtins.print') as mock_print:
-            exit_code = main(["list"])
+            exit_code = main(["unit", "list"])
 
         self.assertEqual(exit_code, 1)
         mock_print.assert_called_once_with("Error: systemd user session is not active.")
@@ -82,7 +82,7 @@ class TestCLI(unittest.TestCase):
         mock_format.return_value = "Formatted output"
 
         with patch('builtins.print') as mock_print:
-            exit_code = main(["list"])
+            exit_code = main(["unit", "list"])
 
         self.assertEqual(exit_code, 0)
         mock_list_units.assert_called_once_with(None)
@@ -114,7 +114,7 @@ class TestCLI(unittest.TestCase):
         mock_format.return_value = "Formatted status"
 
         with patch('builtins.print') as mock_print:
-            exit_code = main(["status", "foo.service"])
+            exit_code = main(["unit", "status", "foo.service"])
 
         self.assertEqual(exit_code, 0)
         mock_get_status.assert_called_once_with("foo.service")
@@ -134,7 +134,7 @@ class TestCLI(unittest.TestCase):
         mock_start_unit.return_value = (True, "Started foo.service successfully")
 
         with patch('builtins.print') as mock_print:
-            exit_code = main(["start", "foo.service"])
+            exit_code = main(["unit", "start", "foo.service"])
 
         self.assertEqual(exit_code, 0)
         mock_start_unit.assert_called_once_with("foo.service")

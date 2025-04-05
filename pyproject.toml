@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sudman"
-version = "0.3.0"
+version = "0.4.0"
 description = "Systemd User Daemon Manager - A user-friendly interface for systemd user units"
 readme = "README.md"
 authors = [
@@ -29,7 +29,8 @@ classifiers = [
 keywords = ["systemd", "linux", "cli", "utility"]
 dependencies = [
     "click>=8.0.0",
-    "curses-menu>=0.0.0; sys_platform != 'win32'"
+    "curses-menu>=0.0.0; sys_platform != 'win32'",
+    "PyYAML>=6.0.0"
 ]
 requires-python = ">=3.8"
 

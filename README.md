@@ -115,7 +115,35 @@ Unmask a unit to allow it to be started again:
 sudman unmask my-service.service
 ```
 
+### New Features (v0.4.0)
+
+Run with verbose logging:
+```bash
+sudman --verbose unit list
+```
+
+Use a config file:
+```bash
+sudman --config ~/.config/sudman/config.yaml unit list
+```
+
+Use the new unit subcommand structure:
+```bash
+sudman unit list
+sudman unit status my-service.service
+sudman unit start my-service.service
+```
+
 ## Release Notes
+
+### v0.4.0 (Upcoming)
+
+- Reorganized commands under `unit` subcommand for better organization
+- Added `--verbose` flag for debug logging
+- Added `--config` flag for configuration file support
+- Improved logging throughout the application
+- Updated documentation and examples
+- Various bug fixes and stability improvements
 
 ### v0.3.0
 
